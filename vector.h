@@ -1,4 +1,8 @@
 #include <iostream>
+/**
+ * A vector is the simplest unit in the engine, being used to represent
+ * positions, colors and directions
+ */
 
 class Vector {
 	public:

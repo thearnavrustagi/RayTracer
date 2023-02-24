@@ -1,3 +1,7 @@
+/**
+ * This class represents the color to be painted for some Pixel, basically
+ * the color class
+ */
 class Pixel : public Vector {
 	public:
 		Pixel (double, double, double);

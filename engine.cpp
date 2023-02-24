@@ -30,7 +30,7 @@ void Engine::render() {
 			double y = double(j) / (height-1);
 			Vector posn(camera.position);
 			Vector dirn(camera.lower_left_corner + x*camera.horizontal + y*camera.vertical - camera.position);
-			Ray ray(posn, dirn,Pixel(1,0.2,0.35));
+			Ray ray(posn, dirn,Pixel(0.8,0.2,0.6));
 			Pixel paintable = ray.get_color();
 			cout << paintable;
 		}
