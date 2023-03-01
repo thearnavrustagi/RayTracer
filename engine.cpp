@@ -5,7 +5,9 @@
 #include "ray.h"
 #include "camera.h"
 #include "engine.h"
-#include "utility.h"
+#include "surface.h"
+#include "sphere.h"
+#include "constants.h"
 
 using namespace std;
 
@@ -23,6 +25,8 @@ void Engine::scanline_indication (int i) {
 void Engine::render() {
 	float red, green, blue;
 
+	Sphere sphere(Vector(0,0,-1),0.5);
+
 	for (float j=0; j < height ; j++) {
 		//scanline_indication(i);
 		for (float i=0; i < width ; i ++) {
@@ -31,7 +35,12 @@ void Engine::render() {
 			Vector posn(camera.position);
 			Vector dirn(camera.lower_left_corner + x*camera.horizontal + y*camera.vertical - camera.position);
 			Ray ray(posn, dirn,Pixel(0.8,0.2,0.6));
+
+			hit_record record;
 			Pixel paintable = ray.get_color();
+			if (sphere.hit(ray, MIN_DISTANCE, MAX_DISTANCE, record)) {
+				paintable = Pixel(0.5*(unit_vector(record.normal) + Vector(1,1,1)));
+			}
 			cout << paintable;
 		}
 	}

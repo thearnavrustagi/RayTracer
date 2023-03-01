@@ -1,3 +1,5 @@
+#ifndef CAMERA_H
+#define CAMERA_H
 class Camera {
 	public:
 		int focal_length;
@@ -31,3 +33,4 @@ class Camera {
 	public:
 		Camera(int, int, int, Vector);
 };
+#endif

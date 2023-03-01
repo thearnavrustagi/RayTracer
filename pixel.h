@@ -1,3 +1,5 @@
+#ifndef PIXEL_H
+#define PIXEL_H
 /**
  * This class represents the color to be painted for some Pixel, basically
  * the color class
@@ -15,3 +17,4 @@ inline std::ostream& operator<< (std::ostream &out, Pixel color) {
 
 	return out;
 }
+#endif

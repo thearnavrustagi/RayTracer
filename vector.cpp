@@ -2,8 +2,6 @@
 #include <iostream>
 #include "vector.h"
 
-#include "utility.h"
-
 Vector::Vector (double a, double b, double c) {
 	x = a;
 	y = b;

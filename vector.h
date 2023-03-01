@@ -1,3 +1,5 @@
+#ifndef VECTOR_H
+#define VECTOR_H
 #include <iostream>
 /**
  * A vector is the simplest unit in the engine, being used to represent
@@ -62,18 +64,4 @@ inline Vector cross (const Vector &v, const Vector &u) {
 inline Vector unit_vector (Vector v) {
 	return v / v.norm();
 }
-
-/**
-inline std::ostream& operator<< (std::ostream &out, const Vector &v);
-
-inline Vector operator+ (const Vector &u, const Vector &v);
-inline Vector operator- (const Vector &u, const Vector &v);
-inline Vector operator* (const Vector &u, const Vector &v);
-inline Vector operator* (const double t, const Vector &v);
-inline Vector operator* (const Vector &v, const double t);
-inline Vector operator/ (const Vector &v, const double t);
-
-inline double dot (const Vector &v, const Vector &u);
-inline Vector cross (const Vector &v, const Vector &u);
-inline Vector unit_vector (Vector v);
-*/
+#endif

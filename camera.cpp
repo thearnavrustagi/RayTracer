@@ -1,5 +1,4 @@
 #include "vector.h"
-#include "utility.h"
 #include "camera.h"
 
 Camera::Camera (int fl, int vh, int vw, Vector posn)

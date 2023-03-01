@@ -2,7 +2,6 @@
 #include "pixel.h"
 #include "ray.h"
 
-#include "utility.h"
 #include <iostream>
 
 Ray::Ray(const Vector u, const Vector v, const Pixel p) : position(u), direction(v), color(p) {}

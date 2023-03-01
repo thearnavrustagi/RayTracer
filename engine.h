@@ -1,3 +1,5 @@
+#ifndef ENGINE_H
+#define ENGINE_H
 /**
  * This header file has the code for our ray tracing engine, calling the 
  * render function starts rendering
@@ -18,3 +20,4 @@ class Engine {
 		void render();
 		void scanline_indication(int);
 };
+#endif
