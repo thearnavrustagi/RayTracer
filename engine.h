@@ -1,5 +1,6 @@
 #ifndef ENGINE_H
 #define ENGINE_H
+#include "surface_list.h"
 /**
  * This header file has the code for our ray tracing engine, calling the 
  * render function starts rendering
@@ -13,6 +14,9 @@ class Engine {
 
 		// this is our active camera
 		Camera camera;
+
+		//this is the list of surfaces
+		SurfaceList surfaces;
 
 	public:
 		Engine(int, int, Camera);

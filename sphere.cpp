@@ -6,7 +6,7 @@
 
 Sphere::Sphere (Vector c, double r) : center(c), radius(r) {}
 
-bool Sphere::hit(const Ray& incident, double min_distance, double max_distance, hit_record& record) {
+bool Sphere::hit(const Ray& incident, double min_distance, double max_distance, hit_record& record) const {
 	Vector delta_center = (incident.position - center);
 	double a = dot(incident.direction,incident.direction);
 	double half_b = dot(delta_center, incident.direction);
@@ -30,7 +30,8 @@ bool Sphere::hit(const Ray& incident, double min_distance, double max_distance, 
 
 	record.distance = root;
 	record.point = incident.at(record.distance);
-	record.normal = (record.point - this->center) / radius;
+	Vector normal = (record.point - this->center) / radius;
+	record.set_face_normal(incident, normal);
 
 	return true;
 

@@ -8,10 +8,11 @@
 #include "surface.h"
 #include "sphere.h"
 #include "constants.h"
+#include "surface_list.h"
 
 using namespace std;
 
-Engine::Engine (int h, int w, Camera cam) : camera(cam) {
+Engine::Engine (int h, int w, Camera cam) : camera{cam}, surfaces{} {
 	this->height = h;
 	this->width = w;
 
@@ -25,7 +26,8 @@ void Engine::scanline_indication (int i) {
 void Engine::render() {
 	float red, green, blue;
 
-	Sphere sphere(Vector(0,0,-1),0.5);
+	surfaces.add(make_shared<Sphere>(Vector{0,0,-1},0.5));
+	surfaces.add(make_shared<Sphere>(Vector{0,-100.5,-1},0.5));
 
 	for (float j=0; j < height ; j++) {
 		//scanline_indication(i);
@@ -38,7 +40,7 @@ void Engine::render() {
 
 			hit_record record;
 			Pixel paintable = ray.get_color();
-			if (sphere.hit(ray, MIN_DISTANCE, MAX_DISTANCE, record)) {
+			if (surfaces.hit(ray, MIN_DISTANCE, MAX_DISTANCE, record)) {
 				paintable = Pixel(0.5*(unit_vector(record.normal) + Vector(1,1,1)));
 			}
 			cout << paintable;
