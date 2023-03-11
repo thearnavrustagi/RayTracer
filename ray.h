@@ -17,6 +17,7 @@ class Ray {
 		Ray(const Vector, const Vector,const Pixel);
 
 		Vector at (double) const;
-		Pixel get_color ();
+		Pixel get_normal_map ();
 };
+
 #endif

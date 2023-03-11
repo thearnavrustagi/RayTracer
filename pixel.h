@@ -1,5 +1,6 @@
 #ifndef PIXEL_H
 #define PIXEL_H
+#include "utils.h"
 /**
  * This class represents the color to be painted for some Pixel, basically
  * the color class
@@ -8,13 +9,21 @@ class Pixel : public Vector {
 	public:
 		Pixel (double, double, double);
 		Pixel (Vector v); 
+
+		Pixel sample (int);
 };
 
 inline std::ostream& operator<< (std::ostream &out, Pixel color) {
-	out << static_cast<int>(255.99 * color[0]) << ' '
-		<< static_cast<int>(255.99 * color[1]) << ' '
-		<< static_cast<int>(255.99 * color[2]) << std::endl;
+	double r = color[0];
+	double g = color[1];
+	double b = color[2];
+
+	out << static_cast<int>(256 * clamp(r,0.0,0.9999)) << ' '
+		<< static_cast<int>(256 * clamp(g,0.0,0.9999)) << ' '
+		<< static_cast<int>(256 * clamp(b,0.0,0.9999)) << std::endl;
 
 	return out;
 }
+
+
 #endif

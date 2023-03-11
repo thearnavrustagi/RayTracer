@@ -20,7 +20,7 @@ class SurfaceList : public Surface {
 		void clear ();
 		void add (shared_ptr<Surface>);
 
-		virtual bool hit (const Ray&, double, double, hit_record&) const;
+		virtual bool hit (const Ray, double, double, hit_record&) const;
 };
 
 #endif

@@ -5,14 +5,15 @@
 #include "ray.h"
 #include "camera.h"
 #include "engine.h"
-#include "surface.h"
 #include "sphere.h"
 #include "constants.h"
+#include "surface.h"
 #include "surface_list.h"
+#include "color.h"
 
 using namespace std;
 
-Engine::Engine (int h, int w, Camera cam) : camera{cam}, surfaces{} {
+Engine::Engine (int h, int w, Camera cam) : camera{cam}, surfaces{}, samples_per_pixel{100} {
 	this->height = h;
 	this->width = w;
 
@@ -20,30 +21,34 @@ Engine::Engine (int h, int w, Camera cam) : camera{cam}, surfaces{} {
 }
 
 void Engine::scanline_indication (int i) {
-	cerr << "\rScanlines Remaining " << i << flush;
+	cerr << "\rScanlines Remaining " << height-i << '%' << flush;
 }
 
 void Engine::render() {
 	float red, green, blue;
 
-	surfaces.add(make_shared<Sphere>(Vector{0,0,-1},0.5));
-	surfaces.add(make_shared<Sphere>(Vector{0,-100.5,-1},0.5));
+	surfaces.add(make_shared<Sphere>(Vector{0,0,-1},0.45));
+	surfaces.add(make_shared<Sphere>(Vector{0,100.5,-1},100));
 
 	for (float j=0; j < height ; j++) {
-		//scanline_indication(i);
+		scanline_indication(j);
 		for (float i=0; i < width ; i ++) {
 			double x = double(i) / (width-1);
 			double y = double(j) / (height-1);
-			Vector posn(camera.position);
-			Vector dirn(camera.lower_left_corner + x*camera.horizontal + y*camera.vertical - camera.position);
-			Ray ray(posn, dirn,Pixel(0.8,0.2,0.6));
+			Ray ray = camera.get_ray(x,y,Pixel{1,1,1});
 
 			hit_record record;
-			Pixel paintable = ray.get_color();
-			if (surfaces.hit(ray, MIN_DISTANCE, MAX_DISTANCE, record)) {
-				paintable = Pixel(0.5*(unit_vector(record.normal) + Vector(1,1,1)));
+			Vector paintable = Vector{0,0,0};
+			for (int s = 0; s < samples_per_pixel; ++s) {
+				double u = (i + random_double()) / (width-1);
+				double v = (j + random_double()) / (height-1);
+				Ray r = camera.get_ray(u, v, Pixel{0,0.5,1});
+				paintable = paintable + Vector{get_color(r, surfaces,samples_per_pixel)};
 			}
-			cout << paintable;
+			/**if (surfaces.hit(ray, MIN_DISTANCE, MAX_DISTANCE, record)) {
+				paintable = Pixel(0.5*(unit_vector(record.normal) + Vector(1,1,1)));
+			}*/
+			cout << Pixel{paintable}.sample(samples_per_pixel);
 		}
 	}
 }

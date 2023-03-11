@@ -1,5 +1,10 @@
 #ifndef CAMERA_H
 #define CAMERA_H
+
+#include "vector.h"
+#include "pixel.h"
+#include "ray.h"
+
 class Camera {
 	public:
 		int focal_length;
@@ -32,5 +37,7 @@ class Camera {
 		Vector normal;
 	public:
 		Camera(int, int, int, Vector);
+		
+		Ray get_ray (double, double, Pixel) const; 
 };
 #endif

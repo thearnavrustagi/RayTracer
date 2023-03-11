@@ -6,7 +6,7 @@
 
 Sphere::Sphere (Vector c, double r) : center(c), radius(r) {}
 
-bool Sphere::hit(const Ray& incident, double min_distance, double max_distance, hit_record& record) const {
+bool Sphere::hit(const Ray incident, double min_distance, double max_distance, hit_record& record) const {
 	Vector delta_center = (incident.position - center);
 	double a = dot(incident.direction,incident.direction);
 	double half_b = dot(delta_center, incident.direction);
@@ -21,7 +21,7 @@ bool Sphere::hit(const Ray& incident, double min_distance, double max_distance, 
 	double alpha = (-half_b -sqrt_discriminant)/a;
 	double beta  = (-half_b +sqrt_discriminant)/a;
 	double root = alpha;
-	cerr << alpha << endl;
+	//cerr << alpha << endl;
 	if (min_distance > alpha || max_distance < alpha) {
 		root = beta;
 		if (min_distance > beta || max_distance < beta)

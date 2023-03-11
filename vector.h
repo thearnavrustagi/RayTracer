@@ -1,6 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #include <iostream>
+#include "utils.h"
 /**
  * A vector is the simplest unit in the engine, being used to represent
  * positions, colors and directions
@@ -20,7 +21,23 @@ class Vector {
 		Vector get_direction();
 		double norm();
 		double norm_squared();
-};
+
+		inline static Vector generate_point_inside_unit_sphere() {
+			while (true) {
+				Vector pt = Vector::random(1,-1);
+				if (pt.norm() < 1) return pt;
+			}
+		}
+
+		inline static Vector random () {
+			return Vector{random_double(),random_double(),random_double()};
+		}
+
+		inline static Vector random (int min, int max) {
+			return Vector{random_double(min,max), random_double(min,max), random_double(min,max)};
+		}
+		
+	};
 
 using namespace std;
 inline std::ostream& operator<< (std::ostream &out, const Vector &v) {
@@ -64,4 +81,6 @@ inline Vector cross (const Vector &v, const Vector &u) {
 inline Vector unit_vector (Vector v) {
 	return v / v.norm();
 }
+
+
 #endif

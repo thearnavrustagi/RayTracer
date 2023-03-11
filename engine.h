@@ -11,6 +11,7 @@ class Engine {
 		int height;
 		// this is the width of the image
 		int width;
+		int samples_per_pixel;
 
 		// this is our active camera
 		Camera camera;

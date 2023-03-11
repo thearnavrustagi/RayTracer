@@ -10,7 +10,7 @@ class Sphere : public Surface{
 		double radius;
 	public:
 		Sphere (Vector,double);
-		bool hit (const Ray&, double, double, hit_record&) const;
+		bool hit (const Ray, double, double, hit_record&) const;
 };
 
 #endif

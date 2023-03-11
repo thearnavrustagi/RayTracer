@@ -15,7 +15,7 @@ void SurfaceList::add (shared_ptr<Surface> surface) {
 	surfaces.push_back(surface);
 }
 
-bool SurfaceList::hit (const Ray& ray, double min_distance, double max_distance, hit_record& record) const {
+bool SurfaceList::hit (const Ray ray, double min_distance, double max_distance, hit_record& record) const {
 	hit_record temporary_record;
 	bool hit_anything = false;
 	double closest_distance = max_distance;

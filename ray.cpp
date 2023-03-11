@@ -1,6 +1,8 @@
 #include "vector.h"
 #include "pixel.h"
 #include "ray.h"
+#include "constants.h"
+#include "surface_list.h"
 
 #include <iostream>
 
@@ -10,8 +12,9 @@ Vector Ray::at (double distance) const {
 	return position + distance * direction;
 }
 
-Pixel Ray::get_color () {
+Pixel Ray::get_normal_map () {
 	Vector unit_vector = this->direction.get_direction();
 	float t = 0.5*(unit_vector.y + 1.0);
 	return Pixel(t*Vector(1.0,1.0,1.0) + (1.0-t)*Vector(this->color));
 }
+
